@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>BelajarBelajar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2>Tambah Course</h2>
+        <br>
+        <form th:action="@{/course/add}" th:object="${course}" method="POST">
+          Code Course: <br>
+          <input class="form-control" type="text" th:field="*{code}"/>
+          <br><br>
+
+          Nama Course: <br>
+          <input class="form-control" type="text" th:field="*{nameCourse}"/>
+          <br><br>
+
+          Description: <br>
+          <input class="form-control" type="text" th:field="*{description}"/>
+          <br><br>
+
+          Jumlah SKS: <br>
+          <input required class="form-control" type="number" th:field="*{jumlahSks}" />
+          <br><br>
+
+          Tanggal Dibuka: <br>
+          <input required class="form-control" type="datetime-local" th:field="*{tanggalDimulai}" />
+          <br><br>
+
+          Tanggal Ditutup: <br>
+          <input required class="form-control" type="datetime-local" th:field="*{tanggalBerakhir}" />
+          <br><br>
+
+          <table class="table">
+            <thead>
+            <th>Penyelenggara Course</th>
+            <th>
+              <button class="btn btn-primary" type="submit" name="addRow">Tambah Row</button>
+            </th>
+            </thead>
+            <tbody>
+            <tr th:each="penyelenggara, iterationStatus : *{listPenyelenggara}">
+              <td>
+                <select
+                        name="noPenyelenggara"
+                        th:field="*{listPenyelenggara[__${iterationStatus.index}__].noPenyelenggara}"
+                        class="form-control"
+                >
+                  <div th:each="penyelenggaraEx, iterationStatus2 : ${listPenyelenggaraExisting}">
+                    <option th:value="${penyelenggaraEx.noPenyelenggara}" th:text="${penyelenggaraEx.namaPenyelenggara}"></option>
+                  </div>
+                </select>
+              </td>
+              <td>
+                <button
+                        th:value="${iterationStatus.index}"
+                        class="btn btn-danger"
+                        type="submit"
+                        name="deleteRow"
+                >
+                  Hapus
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table">
+            <thead>
+            <th>Pengajar Course</th>
+            <th>
+              <button class="btn btn-primary" type="submit" name="addRowPengajar">Tambah Row</button>
+            </th>
+            </thead>
+
+            <tbody>
+            <tr th:each="pengajar, iterationStatus: *{listPengajar}"></tr>
+            <tr th:each="pengajar, iterationStatus: *{listPengajar}">
+              <td>
+                <input
+                        class="form-control"
+                        type="text"
+                        name="namaPengajar"
+                        placeholder="Nama Pengajar"
+                        th:field="*{listPengajar[__${iterationStatus.index}__].namaPengajar}"
+                />
+              </td>
+              <td>
+                <select
+                        class="form-control"
+                        name="isPengajarUniversitas"
+                        th:field="*{listPengajar[__${iterationStatus.index}__].isPengajarUniversitas}"
+                >
+                  <option value="1">Pengajar Universitas</option>
+                  <option value="0">Bukan Pengajar Universitas</option>
+                </select>
+              </td>
+
+              <td>
+                <button
+                        th:value="${iterationStatus.index}"
+                        class="btn btn-danger"
+                        name="deleteRowPengajar"
+                >
+                  Hapus
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <br />
+          <br />
+
+          <button class="btn btn-primary" type="submit" name="save">Submit</button>
+          <a class="btn btn-primary" href="/">Home</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

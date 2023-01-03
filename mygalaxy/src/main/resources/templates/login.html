@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;800&amp;display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;800&amp;display=swap" media="print" onload="this.media='all'"/>
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;800&amp;display=swap"/>
+  </noscript>
+  <link href="./css/font-awesome/css/all.min.css?ver=1.2.0" rel="stylesheet">
+  <link href="./css/bootstrap-icons/bootstrap-icons.css?ver=1.2.0" rel="stylesheet">
+  <link href="./css/bootstrap.min.css?ver=1.2.0" rel="stylesheet">
+  <link href="./css/aos.css?ver=1.2.0" rel="stylesheet">
+  <link href="./css/main.css?ver=1.2.0" rel="stylesheet">
+  <noscript>
+    <style type="text/css">
+      [data-aos] {
+        opacity: 1 !important;
+        transform: translate(0) scale(1) !important;
+      }
+    </style>
+  </noscript>
+</head>
+
+<body>
+<div class="container-fluid text-center">
+  <br>
+  <h2>Hello !</h2>
+  <br>
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          Log in
+        </div>
+        <div class="card-body">
+          <div th:if="${param.error}">
+            <span style="color: red">Invalid username and password.</span>
+          </div>
+          <br>
+          <form th:action="@{/login}" method="POST">
+            <div class="row form-group">
+              <label class="col-sm-6">Username:</label>
+              <input type="text" class="col-sm-8 form-control input-sm" name="username">
+            </div>
+            <div class="row form-group">
+              <label class="col-sm-6">Password:</label>
+              <input type="password" class="col-sm-8 form-control input-sm" name="password">
+            </div>
+            <div class="row form-group justify-content-center">
+              <button type="submit" class="btn btn-primary">Sign In</button>
+            </div>
+            <div>
+              atau <a th:href="@{/login-sso}">Masuk sebagai Admin (SSO UI)</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

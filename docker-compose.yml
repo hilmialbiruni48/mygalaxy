@@ -3,7 +3,6 @@ services:
   web:
     build:
       context: .
-    image: localhost:15000/denny/apap-001
     restart: always
     ports:
       - "11448:8080"

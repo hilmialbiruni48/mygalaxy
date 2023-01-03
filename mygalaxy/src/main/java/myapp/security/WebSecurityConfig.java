@@ -22,6 +22,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/login-sso", "/validate-ticket").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -32,26 +33,26 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public BCryptPasswordEncoder encoder(){
-        return new BCryptPasswordEncoder();
-    }
-//    public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//    @Bean
+//    public BCryptPasswordEncoder encoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+    public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .passwordEncoder(encoder())
+//                .withUser("hilmi")
+//                .password(encoder().encode("dehiksa123"))
+//                .roles("USER");
+//    }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .passwordEncoder(encoder())
-                .withUser("hilmi")
-                .password(encoder().encode("dehiksa123"))
-                .roles("USER");
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
-
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-
-//    @Autowired
-//    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
-//    }
 }

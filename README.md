@@ -1,2 +1,2 @@
-# mygalaxy
-This is my profile application. Happy to visit it ^_^
+# My Galaxy
+> This is a web portofolio about me. Happy to visit :)

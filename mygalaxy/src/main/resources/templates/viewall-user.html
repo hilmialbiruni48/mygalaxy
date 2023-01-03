@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <title>BelajarBelajar</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar (pagetitle='View All')"></nav>
+<div th:if="${user.getRole().getRole() == 'Admin'}" class="container">
+  <h2>Daftar Seluruh User</h2>
+
+  <br>
+  <br>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>No</th>
+      <th>Username User</th>
+      <th>Nama User</th>
+      <th>Email User</th>
+      <th>Role User</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, iterationStatus : ${listUser}">
+      <td th:text="${iterationStatus.count}"></td>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.nama}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.role.role}"></td>
+      <td><a class="btn btn-danger" th:href="@{/user/delete/} + ${user.id}">Delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-primary" href="/">Home</a>
+  <a class="btn btn-warning" th:href="@{/user/add}">Tambah User</a>
+</div>
+
+</body>
+
+</html>

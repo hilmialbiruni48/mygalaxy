@@ -1,6 +1,6 @@
-server:
-  address: 0.0.0.0
-  port: 8080
+#server:
+#  address: 0.0.0.0
+#  port: 8080
 
 spring:
   # konfigurasi untuk koneksi db
@@ -8,19 +8,12 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
     # sesuaikan nama database anda dengan di bawah ini
-    url: jdbc:mysql://db:3306/apap_db?useSSL=false&serverTimezone=Asia/Jakarta
-
+    url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
     # sesuaikan dengan NAMA dan PASSWORD anda dengan username password di bawah ini
-    username: apap_user
-    password: password1234!
+    username: ${PROD_DB_USERNAME}
+    password: ${PROD_DB_PASSWORD}
+    name: spring-blog
 
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-        format_sql: true
-
-    # pembuatan database (create || create-drop || validate || update)
-    hibernate.ddl-auto: create-drop
-
-    show-sql: true
+  sql:
+    init:
+      mode: always

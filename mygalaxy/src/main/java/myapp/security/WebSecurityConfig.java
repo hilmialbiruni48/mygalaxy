@@ -33,11 +33,11 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    public BCryptPasswordEncoder encoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-    public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Bean
+    public BCryptPasswordEncoder encoder(){
+        return new BCryptPasswordEncoder();
+    }
+//    public BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,6 +53,6 @@ public class WebSecurityConfig {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
     }
 }

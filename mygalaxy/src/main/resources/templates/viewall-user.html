@@ -2,14 +2,37 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 
 <head>
-  <title>BelajarBelajar</title>
+  <title>Lihat User</title>
   <object th:include="fragments/fragment :: css" th:remove="tag"></object>
   <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 
 <body>
-<nav th:replace="fragments/fragment :: navbar (pagetitle='View All')"></nav>
-<div th:if="${user.getRole().getRole() == 'Admin'}" class="container">
+<navbar class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header-nav" role="navigation">
+    <div class="container"><a class="link-dark navbar-brand site-title mb-0" href="/">My Profile</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto me-2">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/hilmi-al-biruni/">LinkedIn</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <ul class="navbar-nav pull-right">
+            <a class="nav-item nav-link text-text-secondary" th:href="@{/user/add}">Register</a>
+          </ul>
+          <ul class="navbar-nav pull-right">
+            <a class="nav-item nav-link text-text-secondary" th:href="@{/logout}">Log out</a>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</navbar>
+<div th:if="${user.getRole().getRole() == 'ADMIN'}" class="container">
   <h2>Daftar Seluruh User</h2>
 
   <br>
